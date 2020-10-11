@@ -2,21 +2,22 @@ import cv2
 import numpy as np
 import imutils
 
-#cap = cv2.VideoCapture(0,cv2.CAP_DSHOW)
-cap = cv2.VideoCapture(0)
+
+cap = cv2.VideoCapture("videoEntrada.mp4")
 bg = None
 
 # COLORES PARA VISUALIZACIÓN
 color_comienzo = (204,204,0)
-color_terminacion = (204,0,204)
+color_end = (204,0,204)
 color_far = (255,0,0)
 
 color_comienzo_far = (204,204,0)
-color_far_terminacion = (204,0,204)
+color_far_end = (204,0,204)
 color_comienzo_end = (0,255,255)
 
 color_contorno = (0,255,0)
 color_ymin = (0,130,255) # Punto más alto del contorno
+
 color_dedos = (0,255,255)
 
 rigth = False
@@ -107,9 +108,8 @@ while True:
 						fin.append(end)
 						
 						# Visualización de distintos datos obtenidos
-						
 						cv2.circle(ROI,tuple(start),5,color_comienzo,2)
-						cv2.circle(ROI,tuple(end),5,color_terminacion,2)
+						cv2.circle(ROI,tuple(end),5,color_end,2)
 						cv2.circle(ROI,tuple(far),7,color_far,-1)
 
 
@@ -128,42 +128,12 @@ while True:
 					if i == len(inicio)-1:
 						dedos = dedos + 1
 						cv2.putText(ROI,'{}'.format(dedos),tuple(fin[i]), 1, 1.7,(color_dedos),1,cv2.LINE_AA)
+                
+                print("1")
 				
 				# Se visualiza el número de dedos levantados en el rectángulo izquierdo
 				cv2.putText(frame,'{}'.format(dedos),(390,45), 1, 4,(color_dedos),2,cv2.LINE_AA)
 
-				if dedos !=0:
-					if dedos == 1:
-						rigth = True
-						left = False
-						down = False
-						up = False
-						action= False
-					if dedos == 2:
-						rigth = False 
-						left = True
-						down = False
-						up = False
-						action= False
-					if dedos == 3:
-						rigth = False 
-						left = False
-						down = True
-						up = False
-						action= False						
-					if dedos == 4:
-						rigth = False 
-						left = False
-						down = False
-						up = True
-						action= False
-					if dedos == 5:
-						rigth = False 
-						left = False
-						down = False
-						up = False
-						action= True				
-					
 				
 		cv2.imshow('th',th)
 	cv2.imshow('Frame',frame)
@@ -173,7 +143,6 @@ while True:
 		bg = cv2.cvtColor(frameAux,cv2.COLOR_BGR2GRAY)
 	if k == 27:
 		break
-
-
+	
 cap.release()
 cv2.destroyAllWindows()
