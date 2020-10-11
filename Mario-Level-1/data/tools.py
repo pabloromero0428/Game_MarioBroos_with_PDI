@@ -1,14 +1,19 @@
 __author__ = 'justinarmstrong'
 
 import os
+from data.countingfingers import rigth 
+from data.countingfingers import left 
+from data.countingfingers import up 
+from data.countingfingers import down 
+from data.countingfingers import action 
 import pygame as pg
 
 keybinding = {
-    'action':pg.K_s,
-    'jump':pg.K_a,
-    'left':pg.K_d,
-    'right':pg.K_RIGHT,
-    'down':pg.K_DOWN
+    'action':pg.K_p,
+    'jump':pg.K_k,
+    'left':pg.K_l,
+    'right':rigth,
+    'down':pg.K_q
 }
 
 class Control(object):
